@@ -10,20 +10,25 @@ namespace MVVMCalculator.ViewModels
         {
             double result = 0;
 
-            switch (mathOperator)
+            if (mathOperator == "÷")
             {
-                case "÷":
-                    result = value1 / value2;
-                    break;
-                case "×":
-                    result = value1 * value2;
-                    break;
-                case "+":
-                    result = value1 + value2;
-                    break;
-                case "-":
-                    result = value1 - value2;
-                    break;
+                result = val1 / val2;
+            }
+            else if (mathOperator == "x")
+            {
+                result = val1 * val2;
+            }
+            else if (mathOperator == "+")
+            {
+                result = val1 + val2;
+            }
+            else if (mathOperator == "-")
+            { 
+                result = val2 - val1;
+            }
+            else
+            {
+                Console.WriteLine("Volver a ingresar");
             }
 
             return result;
