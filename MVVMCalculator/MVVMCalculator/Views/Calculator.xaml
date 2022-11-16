@@ -22,7 +22,7 @@
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
             <StackLayout Grid.ColumnSpan="4">
-                <Label x:Name="resultado" FontSize="48" FontAttributes="Bold" BackgroundColor="Black" 
+                <Label x:Name="resultText" FontSize="48" FontAttributes="Bold" BackgroundColor="Black" 
                    Text="{Binding Result}"
               TextColor="White" HorizontalTextAlignment="End" VerticalTextAlignment="Center"
                LineBreakMode="NoWrap"/>
@@ -30,7 +30,7 @@
                 <Label x:Name="operator" FontSize="48" FontAttributes="Bold" BackgroundColor="Black" 
                    Text="{Binding MathOperator}"
               TextColor="White" HorizontalTextAlignment="End" VerticalTextAlignment="Center"
-                />
+              LineBreakMode="NoWrap" Grid.ColumnSpan="4" />
 
             </StackLayout>
 
