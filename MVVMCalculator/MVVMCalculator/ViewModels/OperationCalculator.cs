@@ -6,7 +6,7 @@ namespace MVVMCalculator.ViewModels
 {
     public static class OperationCalculator
     {
-        public static double Calcular(double value1, double value2, string mathOperator)
+        public static double Calcular(double val1, double val2, string mathOperator)
         {
             double result = 0;
 
