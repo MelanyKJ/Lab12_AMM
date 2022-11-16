@@ -21,11 +21,19 @@
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
-            <Label x:Name="resultText" FontSize="48" FontAttributes="Bold" BackgroundColor="Black" 
+            <StackLayout Grid.ColumnSpan="4">
+                <Label x:Name="resultado" FontSize="48" FontAttributes="Bold" BackgroundColor="Black" 
                    Text="{Binding Result}"
               TextColor="White" HorizontalTextAlignment="End" VerticalTextAlignment="Center"
-              LineBreakMode="NoWrap" Grid.ColumnSpan="4" />
+               LineBreakMode="NoWrap"/>
+
+                <Label x:Name="operator" FontSize="48" FontAttributes="Bold" BackgroundColor="Black" 
+                   Text="{Binding MathOperator}"
+              TextColor="White" HorizontalTextAlignment="End" VerticalTextAlignment="Center"
+                />
+
+            </StackLayout>
+
 
             <Button Text="7" Grid.Row="1" Grid.Column="0" Command="{Binding OnSelectNumber}" CommandParameter="7"
                BackgroundColor="White" TextColor="Black"
@@ -61,16 +69,16 @@
                BackgroundColor="White" TextColor="Black"
                FontSize="36" BorderRadius="0"  />
 
-            <Button Text="÷" Grid.Row="1" Grid.Column="3"
+            <Button Text="÷" Grid.Row="1" Grid.Column="3" Command="{Binding OnSelectOperator}" CommandParameter="÷"
                 BackgroundColor="{x:Static local:SharedResources.OpButtonBkColor}" TextColor="White"
                 FontSize="36" BorderRadius="0"  />
-            <Button Text="×" Grid.Row="2" Grid.Column="3"
+            <Button Text="×" Grid.Row="2" Grid.Column="3" Command="{Binding OnSelectOperator}" CommandParameter="×"
                 BackgroundColor="{x:Static local:SharedResources.OpButtonBkColor}" TextColor="White"
                 FontSize="36" BorderRadius="0"  />
-            <Button Text="-" Grid.Row="3" Grid.Column="3"
+            <Button Text="-" Grid.Row="3" Grid.Column="3" Command="{Binding OnSelectOperator}" CommandParameter="-"
                 BackgroundColor="{x:Static local:SharedResources.OpButtonBkColor}" TextColor="White"
                 FontSize="36" BorderRadius="0"  />
-            <Button Text="+" Grid.Row="4" Grid.Column="3"
+            <Button Text="+" Grid.Row="4" Grid.Column="3" Command="{Binding OnSelectOperator}" CommandParameter="+"
                 BackgroundColor="{x:Static local:SharedResources.OpButtonBkColor}" TextColor="White"
                 FontSize="36" BorderRadius="0"  />
 
@@ -78,7 +86,7 @@
                 BackgroundColor="#808080" TextColor="White"
                 FontSize="36" BorderRadius="0"  />
 
-            <Button Text="=" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3"
+            <Button Text="=" Grid.Row="5" Grid.Column="1" Grid.ColumnSpan="3" Command="{Binding OnCalculate}"
                 BackgroundColor="{x:Static local:SharedResources.OpButtonBkColor}" TextColor="White"
                 FontSize="36" BorderRadius="0"  />
 

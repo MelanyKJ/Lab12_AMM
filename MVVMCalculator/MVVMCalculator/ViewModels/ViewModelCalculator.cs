@@ -10,7 +10,19 @@ namespace MVVMCalculator.ViewModels
     {
         #region Propiedades
         int currentState = 1;
-        string mathOperator;
+        string mathOperator = "";
+        public string MathOperator
+        {
+            get { return mathOperator; }
+            set
+            {
+                if (mathOperator != value)
+                {
+                    mathOperator = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         double firstNumber;
         public double FirstNumber
@@ -42,24 +54,26 @@ namespace MVVMCalculator.ViewModels
 
 
         string result;
-		public string Result
-		{
-			get { return result; }
-			set
-			{
-				if (result != value)
-				{
-					result = value;
-					OnPropertyChanged();
-				}
-			}
-		}
+        public string Result
+        {
+            get { return result; }
+            set
+            {
+                if (result != value)
+                {
+                    result = value;
+                    OnPropertyChanged();
+                }
+            }
+        }
 
         #endregion
         public ICommand OnSelectNumber { protected set; get; }
         public ICommand OnClear { protected set; get; }
+        public ICommand OnSelectOperator { protected set; get; }
+        public ICommand OnCalculate { protected set; get; }
 
-        
+
 
         public ViewModelCalculator()
         {
@@ -69,40 +83,62 @@ namespace MVVMCalculator.ViewModels
                 secondNumber = 0;
                 currentState = 1;
                 this.Result = "0";
+                this.MathOperator = "";
             });
 
             OnSelectNumber = new Command<string>(
                execute: (string parameter) =>
                {
-				   
-				   string pressed = parameter;
 
-				   if (Result == "0" || currentState < 0)
-				   {
-					   Result = "";
-					   if (currentState < 0)
-						   currentState *= -1;
-				   }
+                   string pressed = parameter;
 
-				   Result += pressed;
+                   if (Result == "0" || currentState < 0)
+                   {
+                       Result = "";
+                       if (currentState < 0)
+                           currentState *= -1;
+                   }
 
-				   double number;
-				   if (double.TryParse(Result, out number))
-				   {
-					   Result = number.ToString("N0");
-					   if (currentState == 1)
-					   {
-						   firstNumber = number;
-					   }
-					   else
-					   {
-						   secondNumber = number;
-					   }
-				   }
-			   });
+                   Result += pressed;
+
+                   double number;
+                   if (double.TryParse(Result, out number))
+                   {
+                       Result = number.ToString("N0");
+                       if (currentState == 1)
+                       {
+                           firstNumber = number;
+                       }
+                       else
+                       {
+                           secondNumber = number;
+                       }
+                   }
+               });
+
+            OnSelectOperator = new Command<string>(
+               execute: (string parameter) =>
+               {
+                   currentState = -2;
+                   string pressed = parameter;
+                   //mathOperator = pressed;
+                   MathOperator = pressed;
+               });
+
+            OnCalculate = new Command(() =>
+
+            {
+                if (currentState == 2)
+                {
+                    var result = OperationCalculator.Calcular(firstNumber, secondNumber, mathOperator);
+
+                    Result = result.ToString();
+                    firstNumber = result;
+                    currentState = -1;
+                }
+            });
+
 
         }
-
-
     }
 }
